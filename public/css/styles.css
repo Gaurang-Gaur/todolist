@@ -22,7 +22,16 @@ h1 {
   background-color: #A683E3;
   text-align: center;
 }
+.about--item{
+  display:flex;
+  justify-content:flex-end;;
+  align-items:flex-end;
+  max-width:400px;
+  /* background-color:yellow; */
+  align-content:center;
+  flex-wrap:wrap;
 
+}
 .item {
   min-height: 70px;
   display: flex;
