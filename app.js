@@ -1,7 +1,8 @@
 const express=require("express");
 const bodyParser=require("body-parser");
 const app=express();
-let newitems=[];
+let newitems=["Add Daily Items"];
+let workitems=["Add Work Items"];
 
 app.use(bodyParser.urlencoded({extended:true}));// to use the req.object 
 app.use(express.static("public"));
@@ -47,20 +48,28 @@ switch (currentDay) {
   
 app.get("/",function(req,res){
 
-    res.render("list",{kindofDay:day,newitems:newitems});
-});
+    res.render("list",{listtitle:day,newitems:newitems});
+  });
+  
+  app.get("/work",function(req,res){
+  res.render("list",{listtitle:"Workitem",newitems:workitems});
+
+})
 
 app.post("/",function(req,res){
   let newitem = req.body.newitem;
-  newitems.push(newitem);
-
-
-
-  console.log(newitem);
+  console.log(req.body);
+ if(req.body.list==="Workitem"){
+  workitems.push(newitem);
+  res.redirect("/work");
+ }else{
+      newitems.push(newitem);
   res.redirect("/");
+ }
 
 
-})
+});
+
 
 
 app.listen(3000,function(){
